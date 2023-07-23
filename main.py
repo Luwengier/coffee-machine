@@ -30,6 +30,12 @@ resources = {
     "coffee": 100,
 }
 
+
+def show_report():
+    for p in resources:
+        print(f"{p.capitalize()}: {resources[p]}")
+
+
 # TODO: 1. Prompt user by asking "What would you like? (espresso/latte/cappuccino):"
 isFinish = False
 
@@ -40,7 +46,7 @@ while not isFinish:
         isFinish = True
 
     elif prompt == "report":
-        print(f"Report here")
+        show_report()
 
     elif prompt == "espresso":
         print("espresso")
