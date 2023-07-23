@@ -1,16 +1,53 @@
-# This is a sample Python script.
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
 
+# TODO: 1. Prompt user by asking "What would you like? (espresso/latte/cappuccino):"
+isFinish = False
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+while not isFinish:
+    prompt = input("What would you like? (espresso/latte/cappuccino):")
 
+    if prompt == "off":
+        isFinish = True
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    elif prompt == "report":
+        print(f"Report here")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    elif prompt == "espresso":
+        print("espresso")
+    elif prompt == "latte":
+        print("latte")
+    elif prompt == "cappuccino":
+        print("cappuccino")
+
+    else:
+        print("Not valid input")
