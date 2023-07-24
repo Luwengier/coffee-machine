@@ -42,8 +42,15 @@ acc_money = 0
 
 
 def show_report():
+    global acc_money
+
     for p in resources:
-        print(f"{p.capitalize()}: {resources[p]}ml")
+        unit = 'ml'
+        if p == 'coffee':
+            unit = 'g'
+        print(f"{p.capitalize()}: {resources[p]}{unit}")
+
+    print(f"Money: ${acc_money}")
 
 
 def check_resources(drink: str):
