@@ -30,25 +30,50 @@ resources = {
     "coffee": 100,
 }
 
+COIN_MAPPING = {
+    "quarters": 0.25,
+    "dimes": 0.1,
+    "nickles": 0.05,
+    "pennies": 0.01
+}
+
+isFinish = False
+acc_money = 0
+
 
 def show_report():
     for p in resources:
-        print(f"{p.capitalize()}: {resources[p]}")
+        print(f"{p.capitalize()}: {resources[p]}ml")
 
 
 def check_resources(drink: str):
-    target = MENU.get(drink)
-    if not target:
-        return False
-
-    ingredients = target.get("ingredients")
-    for p in ingredients:
-        if resources.get(p) < ingredients.get(p):
+    ingredients = MENU.get(drink).get("ingredients")
+    for ingredient in ingredients:
+        if resources.get(ingredient) < ingredients.get(ingredient):
+            print(f"Sorry there is not enough {ingredient}")
             return False
     return True
 
 
-isFinish = False
+def trade(drink: str):
+    global acc_money
+    cost = MENU.get(drink).get('cost')
+    current = 0
+
+    for coin in COIN_MAPPING:
+        amount = input(f"How many {coin}({COIN_MAPPING.get(coin)})?:")
+        current = round(current + int(amount) * COIN_MAPPING.get(coin), 2)
+        print(current)
+
+    difference = current - cost
+    result = difference >= 0
+
+    if result:
+        acc_money += cost
+    if difference > 0:
+        print(f"Here is ${round(current - cost, 2)} dollars in change.")
+
+    return result
 
 
 def start():
@@ -62,7 +87,8 @@ def start():
         show_report()
 
     elif prompt in MENU.keys():
-        print(check_resources(prompt))
+        # print(check_resources(prompt))
+        print(trade(prompt))
 
     else:
         print("Not valid input")
