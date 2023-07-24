@@ -105,6 +105,7 @@ def start():
         if not check_resources(prompt) or not trade(prompt):
             return
         deduct_resources(prompt)
+        print(f"Here is your {prompt}. Enjoy!")
 
     else:
         print("Not valid input")
