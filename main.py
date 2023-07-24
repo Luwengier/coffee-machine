@@ -102,6 +102,8 @@ def start():
         show_report()
 
     elif prompt in MENU.keys():
+        if not check_resources(prompt) or not trade(prompt):
+            return
         deduct_resources(prompt)
 
     else:
