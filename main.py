@@ -42,13 +42,11 @@ acc_money = 0
 
 
 def show_report():
-    global acc_money
-
-    for p in resources:
+    for resource in resources:
         unit = 'ml'
-        if p == 'coffee':
+        if resource == 'coffee':
             unit = 'g'
-        print(f"{p.capitalize()}: {resources[p]}{unit}")
+        print(f"{resource.capitalize()}: {resources[resource]}{unit}")
 
     print(f"Money: ${acc_money}")
 
@@ -60,6 +58,13 @@ def check_resources(drink: str):
             print(f"Sorry there is not enough {ingredient}")
             return False
     return True
+
+
+def deduct_resources(drink: str):
+    global resources
+    ingredients = MENU.get(drink).get("ingredients")
+    for ingredient in ingredients:
+        resources[ingredient] -= ingredients.get(ingredient)
 
 
 def trade(drink: str):
@@ -77,6 +82,9 @@ def trade(drink: str):
 
     if result:
         acc_money += cost
+    else:
+        print("Sorry that's not enough money. Money refunded.")
+
     if difference > 0:
         print(f"Here is ${round(current - cost, 2)} dollars in change.")
 
@@ -94,8 +102,7 @@ def start():
         show_report()
 
     elif prompt in MENU.keys():
-        # print(check_resources(prompt))
-        print(trade(prompt))
+        deduct_resources(prompt)
 
     else:
         print("Not valid input")
