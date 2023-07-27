@@ -52,7 +52,9 @@ def show_report():
 
 
 def check_resources(drink: str):
+    """Return True when order can be made, False if ingredients are insufficient."""
     ingredients = MENU.get(drink).get("ingredients")
+
     for ingredient in ingredients:
         if resources.get(ingredient) < ingredients.get(ingredient):
             print(f"Sorry there is not enough {ingredient}")
@@ -68,6 +70,7 @@ def deduct_resources(drink: str):
 
 
 def trade(drink: str):
+    """Return True when the payment is accepted, or False if money is insufficient."""
     global acc_money
     cost = MENU.get(drink).get('cost')
     current = 0
